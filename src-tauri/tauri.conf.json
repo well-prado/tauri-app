@@ -35,7 +35,7 @@
         "setCursorVisible": false,
         "setDecorations": false,
         "setFocus": false,
-        "setFullscreen": false,
+        "setFullscreen": true,
         "setIcon": false,
         "setIgnoreCursorEvents": false,
         "setMaxSize": false,
@@ -74,7 +74,8 @@
         "resizable": true,
         "title": "tauri-app",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "maximized": false
       }
     ]
   }

@@ -1,14 +1,32 @@
 <script setup lang="ts">
 import { WebviewWindow } from '@tauri-apps/api/window';
+import { ref, watchEffect } from 'vue';
+
+const webviewStore = ref<WebviewWindow | null>(null);
 
 const createWindow = async () => {
-  const newWindowMeta = { id: Date.now().toString(), title: 'Tauri Studio' };
-  const webview = new WebviewWindow(newWindowMeta.id, {
-    url: '',
+  const webview = new WebviewWindow('second-screen', {
+    url: '../nested/index.html',
   });
 
-  await webview.emit('tauri://create-window', newWindowMeta);
+  webviewStore.value = webview;
 };
+
+async function goFullScreen() {
+  if (webviewStore.value) {
+    await webviewStore.value.setFullscreen(true);
+  }
+}
+
+watchEffect(() => {
+  if (webviewStore.value) {
+    webviewStore.value.isFullscreen().then(isFullscreen => {
+      if (!isFullscreen) {
+        goFullScreen();
+      }
+    });
+  }
+});
 </script>
 
 <template>
