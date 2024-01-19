@@ -30,7 +30,10 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="flex items-center justify-center h-screen">
+  <!-- <div class="flex items-center justify-center h-screen">
     <button @click="createWindow">Open second window</button>
+  </div> -->
+  <div id="main">
+    <router-view />
   </div>
 </template>
